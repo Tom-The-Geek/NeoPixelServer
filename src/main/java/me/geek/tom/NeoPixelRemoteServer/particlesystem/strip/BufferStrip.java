@@ -1,7 +1,8 @@
-package me.geek.tom.NeoPixelRemoteServer.particle.strip;
+package me.geek.tom.NeoPixelRemoteServer.particlesystem.strip;
 
 import com.github.mbelling.ws281x.Color;
 import com.google.common.collect.Lists;
+import me.geek.tom.NeoPixelRemoteServer.particlesystem.Colour;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -18,28 +19,35 @@ public class BufferStrip implements IStrip {
     public BufferStrip(IStrip dest) {
         this.dest = dest;
         this.length = dest.getLength();
+        this.clear();
     }
 
     public void setPixel(int pixel, Color color) {
         if (pixel < 0 || pixel >= this.length) {
             LOGGER.warning("Position is off the strip, ignoring." +
                     "\nPlease contact the developer if this message continues to occur.");
+        } else {
+            Color c = Colour.blendColours(color, getPixel(pixel));
+            this.pixels.set(pixel, c);
         }
-        this.pixels.set(pixel, color);
     }
 
     public void setPixel(int pixel, int r, int g, int b) {
         if (pixel < 0 || pixel >= this.length) {
             LOGGER.warning("Position is off the strip, ignoring." +
                     "\nPlease contact the developer if this message continues to occur.");
+        } else {
+            Color c = Colour.blendColours(new Color(r, g, b), getPixel(pixel));
+            this.pixels.set(pixel, c);
         }
-        this.pixels.set(pixel, new Color(r, g, b));
     }
 
     public void show() {
         for (int pos = 0; pos < length; pos++) {
             dest.setPixel(pos, this.pixels.get(pos));
         }
+        dest.show();
+        this.clear();
     }
 
     public int getLength() {
@@ -51,5 +59,9 @@ public class BufferStrip implements IStrip {
         for (int i = 0; i < this.length; i++) {
             this.pixels.add(new Color(0, 0, 0));
         }
+    }
+
+    public Color getPixel(int pos) {
+        return this.pixels.get(pos);
     }
 }
