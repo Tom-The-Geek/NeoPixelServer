@@ -55,7 +55,10 @@ public class ClientThread extends Thread {
                 byte[] packetId = new byte[2];
                 clientInput.readFully(packetId, 0, 2);
                 LOGGER.info("Got id: " + new String(packetId) + "Reading length...");
-                int length = clientInput.readInt();
+                byte[] length_byte = new byte[1];
+                int length;
+                clientInput.readFully(length_byte, 0, 1);
+                length = length_byte[0];
                 LOGGER.info("Got length: " + length + "! Reading data bytes...");
                 byte[] data = new byte[length];
                 clientInput.readFully(data, 0, length);

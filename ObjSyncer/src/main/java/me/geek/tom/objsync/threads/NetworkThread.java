@@ -25,7 +25,8 @@ public class NetworkThread extends Thread {
     @Override
     public void run() {
         if (this.mode.equals(Mode.CLIENT)) {
-            this.connectionThread = new ClientThread("localhost", 9845);
+            // this.connectionThread = new ClientThread("192.168.1.115", 9845);
+            this.connectionThread = new ClientThread("127.0.0.1", 9845);
         } else if (this.mode.equals(Mode.SERVER)) {
             this.connectionThread = new ServerConnectionThread();
         }

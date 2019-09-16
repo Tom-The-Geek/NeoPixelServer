@@ -1,6 +1,7 @@
 package me.geek.tom.objsync.test;
 
 import me.geek.tom.objsync.packets.Packet;
+import me.geek.tom.objsync.packets.PacketRegistry;
 import me.geek.tom.objsync.threads.NetworkThread;
 import me.geek.tom.objsync.threads.server.ServerClientConnectionThread;
 import me.geek.tom.objsync.threads.server.ServerConnectionThread;
@@ -14,6 +15,14 @@ public class TestServer {
     private static Logger LOGGER = Logger.getLogger(TestServer.class.getName());
 
     public static void main(String[] args) {
+
+        try {
+            PacketRegistry.registerPacket("tt".getBytes(), TestPacket.class);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        PacketRegistry.freezeRegistry();
+
         NetworkThread networkThread = new NetworkThread(NetworkThread.Mode.SERVER);
         networkThread.start();
         while (!networkThread.isReady()) {

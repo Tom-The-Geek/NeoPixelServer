@@ -68,10 +68,10 @@ public class ServerClientConnectionThread extends Thread {
             throw new IllegalStateException("Packet id must be exactly two bytes!");
         }
 
+        byte length_byte = ((Integer) length).byteValue();
+
         serverOutput.write(packetId);
-        serverOutput.flush();
-        serverOutput.write(length);
-        serverOutput.flush();
+        serverOutput.write(length_byte);
         serverOutput.write(data);
         serverOutput.flush();
     }

@@ -2,12 +2,15 @@ package me.geek.tom.objsync.packets;
 
 import me.geek.tom.objsync.util.Util;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class PacketRegistry {
     private static Map<byte[], Class<? extends Packet>> packetIds = new HashMap<>();
     private static boolean isFrozen = false;
+    private static Logger LOGGER = Logger.getLogger(PacketRegistry.class.getName());
 
     public static boolean isFrozen() {
         return isFrozen;
@@ -28,6 +31,7 @@ public class PacketRegistry {
         }
 
         packetIds.put(packetId, packetType);
+        LOGGER.info("PACKET REGISTERED WITH ID: " + Arrays.toString(packetId));
     }
 
     public static Class<? extends Packet> queryPacket(byte[] packetId) {
