@@ -46,7 +46,9 @@ public class BufferStrip implements IStrip {
     public void show() {
         for (int pos = 0; pos < length; pos++) {
             destination.setPixel(pos, this.pixels.get(pos));
+            System.out.print(this.pixels.get(pos).getColorBits());
         }
+        System.out.println();
         destination.show();
         this.clear();
     }

@@ -1,6 +1,7 @@
 package me.geek.tom.NeoPixelRemoteServer.particlesystem.particle;
 
 import com.github.mbelling.ws281x.Color;
+import me.geek.tom.NeoPixelRemoteServer.particlesystem.Colour;
 import me.geek.tom.NeoPixelRemoteServer.particlesystem.strip.IStrip;
 
 import java.util.Random;
@@ -18,6 +19,9 @@ public class Particle {
 
     // Track the particles position
     private int pos;
+
+    // For how long can this particle exist?
+    private int decayTime = 5000;
 
     private int age;
 
@@ -42,20 +46,21 @@ public class Particle {
         this.age = 0;
         this.start_time = System.nanoTime() / 1000000;
         this.particle = particlePool[new Random().nextInt(particlePool.length)];
-        for (Color c : this.particle) {
+        /* for (Color c : this.particle) {
             System.out.println("R: " + c.getRed() + " G: " + c.getGreen() + " B: " + c.getBlue());
-        }
+        } */
         System.out.println();
     }
 
 
 
     public void draw(IStrip strip) {
+        float sf = ((float) this.age) / ((float) this.decayTime);
         for (int i = 0; i < particle.length; i++) {
             int pixelPos = pos + i - 1;
 
             if (!(i >= strip.getLength() || pos < 0)) {
-                strip.setPixel(pixelPos, particle[i]);
+                strip.setPixel(pixelPos, scaleColour(particle[i], sf));
             }
         }
     }
@@ -63,10 +68,15 @@ public class Particle {
     public void tick(ParticleManager manager) {
         this.age += (System.nanoTime() / 1000000) - start_time;
         // Time for the particle to die in Milliseconds
-        int decayTime = 5000;
         if (this.age >= decayTime) {
             this.makeDead();
         }
     }
 
+    private Color scaleColour(Color colour, float sf) {
+        int r = 1 - (int) Math.floor(colour.getRed() * sf);
+        int g = 1 - (int) Math.floor(colour.getGreen() * sf);
+        int b = 1 - (int) Math.floor(colour.getBlue() * sf);
+        return new Color(r, g, b);
+    }
 }
