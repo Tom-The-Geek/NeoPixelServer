@@ -7,6 +7,7 @@ import me.geek.tom.objsync.threads.client.event.ClientPacketEventManager;
 
 import java.util.logging.Logger;
 
+@SuppressWarnings("ALL")
 public class TestClient {
 
     private static Logger LOGGER = Logger.getLogger(TestClient.class.getName());
@@ -20,12 +21,12 @@ public class TestClient {
             e.printStackTrace();
         }
 
-        PacketRegistry.freezeRegistry();
+        PacketRegistry.freezeRegistry(true);
 
         NetworkThread networkThread = new NetworkThread(NetworkThread.Mode.CLIENT);
         networkThread.start();
 
-        while (!networkThread.isReady()) {}
+        while (networkThread.isReady()) {}
 
         ClientThread clientThread = (ClientThread) networkThread.getConnectionThread();
     }

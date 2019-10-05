@@ -6,9 +6,9 @@ import me.geek.tom.objsync.packets.Packet;
 import java.util.List;
 
 public class ClientPacketEventManager {
-    public static ClientPacketEventManager INSTANCE = new ClientPacketEventManager();
+    public static final ClientPacketEventManager INSTANCE = new ClientPacketEventManager();
 
-    private List<ClientPacketHandler> handlers = Lists.newArrayList();
+    private final List<ClientPacketHandler> handlers = Lists.newArrayList();
 
     public void onPacket(Packet packet) {
         for (ClientPacketHandler handler : this.handlers) {

@@ -5,9 +5,10 @@ import me.geek.tom.NeoPixelRemoteServer.particlesystem.strip.IStrip;
 
 import java.util.Random;
 
+@SuppressWarnings("unused")
 public class Particle {
 
-    private long start_time;
+    private final long start_time;
 
     private boolean dead = false;
 
@@ -20,24 +21,21 @@ public class Particle {
 
     private int age;
 
-    // Time for the particle to die in Milliseconds
-    private static int decayTime = 5000;
-
     public boolean isDead() {
         return dead;
     }
 
-    public void makeDead() {
+    private void makeDead() {
         this.dead = true;
     }
 
-    private static Color[][] particlePool = {
+    private static final Color[][] particlePool = {
             {new Color(128, 0, 0), new Color(255, 0, 0), new Color(128, 0, 0)},
             {new Color(0, 128, 0), new Color(0, 255, 0), new Color(0, 128, 0)},
             {new Color(0, 0, 128), new Color(0, 0, 255), new Color(0, 0, 128)},
     };
 
-    private Color[] particle;
+    private final Color[] particle;
 
     public Particle() {
         this.pos = 0;
@@ -64,6 +62,8 @@ public class Particle {
 
     public void tick(ParticleManager manager) {
         this.age += (System.nanoTime() / 1000000) - start_time;
+        // Time for the particle to die in Milliseconds
+        int decayTime = 5000;
         if (this.age >= decayTime) {
             this.makeDead();
         }

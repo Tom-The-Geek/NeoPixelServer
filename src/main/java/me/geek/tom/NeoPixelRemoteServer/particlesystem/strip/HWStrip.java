@@ -3,14 +3,15 @@ package me.geek.tom.NeoPixelRemoteServer.particlesystem.strip;
 import com.github.mbelling.ws281x.Color;
 import com.github.mbelling.ws281x.Ws281xLedStrip;
 
+@SuppressWarnings("unused")
 public class HWStrip implements IStrip {
 
     public int getLength() {
         return length;
     }
 
-    private int length;
-    private Ws281xLedStrip strip;
+    private final int length;
+    private final Ws281xLedStrip strip;
 
     public HWStrip(Ws281xLedStrip strip) {
         this.strip = strip;

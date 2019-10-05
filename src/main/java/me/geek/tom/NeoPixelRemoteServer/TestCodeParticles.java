@@ -11,6 +11,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@SuppressWarnings("ALL")
 public class TestCodeParticles {
 
     Logger LOGGER = Logger.getLogger(TestCodeParticles.class.getName());

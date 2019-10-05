@@ -10,10 +10,12 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+@SuppressWarnings({"LoopConditionNotUpdatedInsideLoop", "WeakerAccess"})
 public class TestServer {
 
-    private static Logger LOGGER = Logger.getLogger(TestServer.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(TestServer.class.getName());
 
+    @SuppressWarnings("StatementWithEmptyBody")
     public static void main(String[] args) {
 
         try {
@@ -21,19 +23,19 @@ public class TestServer {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        PacketRegistry.freezeRegistry();
+        PacketRegistry.freezeRegistry(true);
 
         NetworkThread networkThread = new NetworkThread(NetworkThread.Mode.SERVER);
         networkThread.start();
-        while (!networkThread.isReady()) {
-            LOGGER.info(".");
+        while (networkThread.isReady()) {
+            // LOGGER.info(".");
         }
 
         ServerConnectionThread serverThread = (ServerConnectionThread) networkThread.getConnectionThread();
 
         Scanner scanner = new Scanner(System.in);
 
-        while (true) {
+         while (true) {
             LOGGER.info("Text:");
             String packet = scanner.nextLine();
 

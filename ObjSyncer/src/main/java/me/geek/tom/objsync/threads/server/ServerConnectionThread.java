@@ -11,14 +11,13 @@ import java.util.logging.Logger;
 public class ServerConnectionThread extends Thread {
 
     private ServerSocket socket;
-    private static Logger LOGGER = Logger.getLogger(ServerConnectionThread.class.getName());
-    private ServerClientConnectionThread[] clientTreads;
+    private static final Logger LOGGER = Logger.getLogger(ServerConnectionThread.class.getName());
 
     public List<Thread> getThreads() {
         return threads;
     }
 
-    private List<Thread> threads = Lists.newArrayList();
+    private final List<Thread> threads = Lists.newArrayList();
 
     public ServerConnectionThread() {
         super();
@@ -33,10 +32,11 @@ public class ServerConnectionThread extends Thread {
             LOGGER.info("Failed to bind to port:");
             e.printStackTrace();
         }
+
         while (!this.socket.isClosed()) {
             try {
                 Socket s = this.socket.accept();
-                Thread t = new ServerClientConnectionThread(s);
+                Thread t = new ServerClientConnectionThread(s, this);
                 t.start();
                 threads.add(t);
             } catch (IOException e) {

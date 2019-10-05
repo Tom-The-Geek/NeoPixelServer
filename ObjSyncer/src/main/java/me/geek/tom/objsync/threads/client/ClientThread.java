@@ -11,13 +11,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.Socket;
 import java.util.logging.Logger;
 
+@SuppressWarnings({"unused", "PrimitiveArrayArgumentToVarargsMethod"})
 public class ClientThread extends Thread {
 
     private Socket socket;
     private DataOutputStream clientOutput;
-    private DataInputStream clientInput;
 
-    private Logger LOGGER = Logger.getLogger(ClientThread.class.getName());
+    private final Logger LOGGER = Logger.getLogger(ClientThread.class.getName());
 
     public ClientThread(String host, int port) {
         super();
@@ -30,7 +30,6 @@ public class ClientThread extends Thread {
         }
     }
 
-    // @TODO Fix receive/send code
     @Override
     public void run() {
         if (!this.socket.isConnected()) {
@@ -39,9 +38,10 @@ public class ClientThread extends Thread {
 
         LOGGER.info("Creating data streams...");
 
+        DataInputStream clientInput;
         try {
             this.clientOutput = new DataOutputStream(this.socket.getOutputStream());
-            this.clientInput = new DataInputStream(this.socket.getInputStream());
+            clientInput = new DataInputStream(this.socket.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
             return;
@@ -74,8 +74,6 @@ public class ClientThread extends Thread {
         }
     }
 
-    // @TODO Fix receive/send code
-
     public void sendPacket(Packet packet) throws IOException, IllegalStateException {
         int length = packet.getLength();
         byte[] data = packet.toBytes();
@@ -97,8 +95,7 @@ public class ClientThread extends Thread {
 
     private Packet decodePacket(byte[] packetId, byte[] data) {
         try {
-            Packet packet = (Packet) PacketRegistry.queryPacket(packetId).getMethod("fromBytes", byte[].class).invoke(data);
-            return packet;
+            return (Packet) PacketRegistry.queryPacket(packetId).getMethod("fromBytes", byte[].class).invoke(null, data);
         } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
             return null;

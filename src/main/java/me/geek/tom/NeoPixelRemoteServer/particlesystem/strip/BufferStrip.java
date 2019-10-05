@@ -8,17 +8,18 @@ import java.util.List;
 import java.util.logging.Logger;
 
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class BufferStrip implements IStrip {
 
-    private static Logger LOGGER = Logger.getLogger(BufferStrip.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(BufferStrip.class.getName());
 
     private List<Color> pixels;
-    private int length;
-    private IStrip dest;
+    private final int length;
+    private final IStrip destination;
 
-    public BufferStrip(IStrip dest) {
-        this.dest = dest;
-        this.length = dest.getLength();
+    public BufferStrip(IStrip destination) {
+        this.destination = destination;
+        this.length = destination.getLength();
         this.clear();
     }
 
@@ -44,9 +45,9 @@ public class BufferStrip implements IStrip {
 
     public void show() {
         for (int pos = 0; pos < length; pos++) {
-            dest.setPixel(pos, this.pixels.get(pos));
+            destination.setPixel(pos, this.pixels.get(pos));
         }
-        dest.show();
+        destination.show();
         this.clear();
     }
 

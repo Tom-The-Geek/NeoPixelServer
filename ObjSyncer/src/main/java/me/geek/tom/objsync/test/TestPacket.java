@@ -1,14 +1,15 @@
 package me.geek.tom.objsync.test;
 
-import me.geek.tom.objsync.packets.Packet;
+        import me.geek.tom.objsync.packets.Packet;
 
+@SuppressWarnings("unused")
 public class TestPacket extends Packet {
 
     public String getData() {
         return data;
     }
 
-    private String data;
+    private final String data;
 
     public TestPacket(String data) {
         this.data = data;
@@ -29,5 +30,7 @@ public class TestPacket extends Packet {
         return this.data.length();
     }
 
-
+    public static Packet fromBytes(byte[] bytes) {
+        return new TestPacket(new String(bytes));
+    }
 }

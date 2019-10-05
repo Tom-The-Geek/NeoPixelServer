@@ -8,15 +8,16 @@ import me.geek.tom.NeoPixelRemoteServer.particlesystem.strip.IStrip;
 import java.util.List;
 import java.util.logging.Logger;
 
+@SuppressWarnings({"UnusedAssignment", "unused"})
 public class ParticleManager {
 
-    private BufferStrip buffer;
-    private IStrip outputStrip;
+    private final BufferStrip buffer;
+    private final IStrip outputStrip;
 
     private Logger LOGGER = Logger.getLogger(ParticleManager.class.getName());
 
-    private List<Particle> particles = Lists.newArrayList();
-    private List<Emitter> emitters = Lists.newArrayList();
+    private final List<Particle> particles = Lists.newArrayList();
+    private final List<Emitter> emitters = Lists.newArrayList();
 
     public ParticleManager(IStrip strip) {
         this.outputStrip = strip;

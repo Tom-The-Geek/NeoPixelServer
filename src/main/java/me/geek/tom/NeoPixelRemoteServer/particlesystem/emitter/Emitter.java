@@ -5,6 +5,7 @@ import me.geek.tom.NeoPixelRemoteServer.particlesystem.particle.ParticleManager;
 
 import java.util.Random;
 
+@SuppressWarnings("unused")
 public class Emitter {
 
     private long start_time;
@@ -14,9 +15,9 @@ public class Emitter {
         return particle;
     }
 
-    private Class<? extends Particle> particle;
-    private int probability;
-    private Random random = new Random();
+    private final Class<? extends Particle> particle;
+    private final int probability;
+    private final Random random = new Random();
 
     public Emitter(Class<? extends Particle> particle, int probability) {
         this.particle = particle;
@@ -37,7 +38,7 @@ public class Emitter {
         }
     }
 
-    public void spawnParticle(ParticleManager manager) {
+    private void spawnParticle(ParticleManager manager) {
         try {
             Particle newParticle = particle.newInstance();
             newParticle.setPos(random.nextInt(manager.getLength()));

@@ -3,12 +3,9 @@ package me.geek.tom.objsync.threads;
 import me.geek.tom.objsync.threads.client.ClientThread;
 import me.geek.tom.objsync.threads.server.ServerConnectionThread;
 
-import java.net.Socket;
-
 public class NetworkThread extends Thread {
 
-    private Socket socket;
-    private Mode mode;
+    private final Mode mode;
 
     public Thread getConnectionThread() {
         return connectionThread;

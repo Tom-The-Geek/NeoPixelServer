@@ -9,35 +9,33 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.Socket;
+import java.util.logging.Logger;
 
+@SuppressWarnings("PrimitiveArrayArgumentToVarargsMethod")
 public class ServerClientConnectionThread extends Thread {
 
     private DataOutputStream serverOutput;
     private DataInputStream serverInput;
 
-    private Socket socket;
+    private final ServerConnectionThread owner;
 
-    public ServerClientConnectionThread(Socket socket) {
-        this.socket = socket;
+    private static final Logger LOGGER = Logger.getLogger(ServerClientConnectionThread.class.getName());
+
+    public ServerClientConnectionThread(Socket socket, ServerConnectionThread owner) {
+        this.owner = owner;
         try {
-            serverInput  = new DataInputStream(this.socket.getInputStream());
-            serverOutput = new DataOutputStream(this.socket.getOutputStream());
+            serverInput  = new DataInputStream(socket.getInputStream());
+            serverOutput = new DataOutputStream(socket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
         setName("Server -> client connection thread");
     }
 
-    /* @TODO Fix receive/send code
-    I believe the problem lies with the data not being read correctly or the output now being flushed or something
-    */
-
     @Override
     public void run() {
-        boolean alive = true;
-        while (alive) {
-            try {
-
+        try {
+            while (true) {
                 byte[] packetId = new byte[2];
                 serverInput.readFully(packetId, 0, 2);
                 int length = serverInput.readInt();
@@ -50,12 +48,12 @@ public class ServerClientConnectionThread extends Thread {
 
                     ServerPacketEventManager.INSTANCE.onPacket(packet);
                 }
-
-            } catch (IOException e) { alive = false; e.printStackTrace(); return;}
+            }
+        } catch (IOException e) {
+            LOGGER.info("A client has disconnected?");
         }
+        owner.getThreads().remove(this);
     }
-
-    // @TODO Fix receive/send code
 
     public void sendPacket(Packet packet) throws IOException, IllegalStateException {
         int length = packet.getLength();
@@ -78,8 +76,7 @@ public class ServerClientConnectionThread extends Thread {
 
     private Packet decodePacket(byte[] packetId, byte[] data) {
         try {
-            Packet packet = (Packet) PacketRegistry.queryPacket(packetId).getMethod("fromBytes", byte[].class).invoke(data);
-            return packet;
+            return (Packet) PacketRegistry.queryPacket(packetId).getMethod("fromBytes", byte[].class).invoke(null, data);
         } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
             return null;
