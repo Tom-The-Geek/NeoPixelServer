@@ -7,12 +7,25 @@ import me.geek.tom.NeoPixelRemoteServer.particlesystem.particle.Particle;
 import me.geek.tom.NeoPixelRemoteServer.particlesystem.particle.ParticleManager;
 import me.geek.tom.NeoPixelRemoteServer.particlesystem.strip.HWStrip;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Scanner;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-@SuppressWarnings("ALL")
+@SuppressWarnings("unsused")
 public class TestCodeParticles {
+
+    static {
+        InputStream stream = TestCodeParticles.class.getClassLoader().
+                getResourceAsStream("logging.properties");
+        try {
+            LogManager.getLogManager().readConfiguration(stream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     Logger LOGGER = Logger.getLogger(TestCodeParticles.class.getName());
 

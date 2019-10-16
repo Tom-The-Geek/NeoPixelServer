@@ -34,21 +34,21 @@ public class BufferStrip implements IStrip {
     }
 
     public void setPixel(int pixel, int r, int g, int b) {
-        if (pixel < 0 || pixel >= this.length) {
-            LOGGER.warning("Position is off the strip, ignoring." +
-                    "\nPlease contact the developer if this message continues to occur.");
-        } else {
+        if (pixel >= 0 && pixel < this.length) {
             Color c = Colour.blendColours(new Color(r, g, b), getPixel(pixel));
             this.pixels.set(pixel, c);
         }
+        // LOGGER.warning("Position is off the strip, ignoring." +
+        //         "\nPlease contact the developer if this message continues to occur.");
+        // Would be in an else body
     }
 
     public void show() {
         for (int pos = 0; pos < length; pos++) {
             destination.setPixel(pos, this.pixels.get(pos));
-            System.out.print(this.pixels.get(pos).getColorBits());
+            // System.out.print(this.pixels.get(pos).getColorBits());
         }
-        System.out.println();
+        // System.out.println();
         destination.show();
         this.clear();
     }

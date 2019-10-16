@@ -2,7 +2,11 @@ package me.geek.tom.objsync.threads.client;
 
 import me.geek.tom.objsync.packets.Packet;
 import me.geek.tom.objsync.packets.PacketRegistry;
-import me.geek.tom.objsync.threads.client.event.ClientPacketEventManager;
+import me.geek.tom.objsync.threads.client.event.ConnectedEvent;
+import me.geek.tom.objsync.threads.client.event.LostConnectionEvent;
+import me.geek.tom.objsync.threads.client.event.managers.ClientEventManager;
+import me.geek.tom.objsync.threads.client.event.managers.ClientPacketEventManager;
+import me.geek.tom.objsync.threads.server.event.ClientDisconnectEvent;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -49,6 +53,8 @@ public class ClientThread extends Thread {
 
         LOGGER.info("Done! Main loop!");
 
+        ClientEventManager.INSTANCE.triggerEvent(new ConnectedEvent());
+
         while (!this.socket.isClosed()) {
             try {
                 LOGGER.info("Reading id bytes...");
@@ -69,9 +75,11 @@ public class ClientThread extends Thread {
                 LOGGER.info("DONE!");
             } catch (IOException e) {
                 e.printStackTrace();
+                ClientEventManager.INSTANCE.triggerEvent(new LostConnectionEvent());
                 return;
             }
         }
+        ClientEventManager.INSTANCE.triggerEvent(new LostConnectionEvent());
     }
 
     public void sendPacket(Packet packet) throws IOException, IllegalStateException {

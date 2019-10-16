@@ -2,7 +2,9 @@ package me.geek.tom.objsync.threads.server;
 
 import me.geek.tom.objsync.packets.Packet;
 import me.geek.tom.objsync.packets.PacketRegistry;
-import me.geek.tom.objsync.threads.server.event.ServerPacketEventManager;
+import me.geek.tom.objsync.threads.server.event.ClientDisconnectEvent;
+import me.geek.tom.objsync.threads.server.event.managers.EventManager;
+import me.geek.tom.objsync.threads.server.event.managers.ServerPacketEventManager;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -11,7 +13,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.Socket;
 import java.util.logging.Logger;
 
-@SuppressWarnings("PrimitiveArrayArgumentToVarargsMethod")
+@SuppressWarnings({"PrimitiveArrayArgumentToVarargsMethod", "WeakerAccess"})
 public class ServerClientConnectionThread extends Thread {
 
     private DataOutputStream serverOutput;
@@ -19,10 +21,13 @@ public class ServerClientConnectionThread extends Thread {
 
     private final ServerConnectionThread owner;
 
+    private Socket socket;
+
     private static final Logger LOGGER = Logger.getLogger(ServerClientConnectionThread.class.getName());
 
     public ServerClientConnectionThread(Socket socket, ServerConnectionThread owner) {
         this.owner = owner;
+        this.socket = socket;
         try {
             serverInput  = new DataInputStream(socket.getInputStream());
             serverOutput = new DataOutputStream(socket.getOutputStream());
@@ -53,6 +58,7 @@ public class ServerClientConnectionThread extends Thread {
             LOGGER.info("A client has disconnected?");
         }
         owner.getThreads().remove(this);
+        EventManager.INSTANCE.triggerEvent(new ClientDisconnectEvent(socket.getInetAddress()));
     }
 
     public void sendPacket(Packet packet) throws IOException, IllegalStateException {

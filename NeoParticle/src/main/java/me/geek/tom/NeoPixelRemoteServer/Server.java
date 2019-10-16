@@ -3,7 +3,7 @@ package me.geek.tom.NeoPixelRemoteServer;
 import com.github.mbelling.ws281x.LedStripType;
 import com.github.mbelling.ws281x.Ws281xLedStrip;
 
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"unused"})
 public class Server {
 
     public static void main(String[] args) {

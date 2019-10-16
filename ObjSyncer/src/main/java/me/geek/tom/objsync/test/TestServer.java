@@ -5,15 +5,28 @@ import me.geek.tom.objsync.packets.PacketRegistry;
 import me.geek.tom.objsync.threads.NetworkThread;
 import me.geek.tom.objsync.threads.server.ServerClientConnectionThread;
 import me.geek.tom.objsync.threads.server.ServerConnectionThread;
+import me.geek.tom.objsync.threads.server.event.managers.EventManager;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Scanner;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-@SuppressWarnings({"LoopConditionNotUpdatedInsideLoop", "WeakerAccess"})
+@SuppressWarnings({"LoopConditionNotUpdatedInsideLoop"})
 public class TestServer {
 
     private static final Logger LOGGER = Logger.getLogger(TestServer.class.getName());
+
+    static {
+        InputStream stream = TestServer.class.getClassLoader().
+                getResourceAsStream("logging.properties");
+        try {
+            LogManager.getLogManager().readConfiguration(stream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     public static void main(String[] args) {
@@ -25,9 +38,11 @@ public class TestServer {
         }
         PacketRegistry.freezeRegistry(true);
 
+        EventManager.INSTANCE.addHandler((event) -> LOGGER.info("An event has been triggered! " + event.getClass().getName()));
+
         NetworkThread networkThread = new NetworkThread(NetworkThread.Mode.SERVER);
         networkThread.start();
-        while (networkThread.isReady()) {
+        while (!networkThread.isReady()) {
             // LOGGER.info(".");
         }
 

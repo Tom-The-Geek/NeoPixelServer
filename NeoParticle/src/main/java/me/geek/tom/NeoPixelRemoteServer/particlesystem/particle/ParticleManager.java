@@ -30,7 +30,7 @@ public class ParticleManager {
             em.tick(this);
         }
 
-        // TODO: Add second level emitter stuff for
+        // TODO: Add second level emitter stuff for fancy particles!
 
         List<Particle> deadParticles = Lists.newArrayList();
 

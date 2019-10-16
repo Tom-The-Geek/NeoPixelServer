@@ -1,15 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>NeoPixelRemoteServer</artifactId>
         <groupId>me.geek.tom</groupId>
+        <artifactId>NeoPixelRemoteServer</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ObjSyncer</artifactId>
+    <artifactId>NeoParticle</artifactId>
+
     <build>
         <plugins>
             <plugin>
@@ -21,6 +22,7 @@
                 </configuration>
                 <version>3.8.1</version>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -34,7 +36,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>me.geek.tom.objsync.test.TestServer</mainClass>
+                                    <mainClass>me.geek.tom.NeoPixelRemoteServer.TestCodeParticles</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

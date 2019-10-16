@@ -1,12 +1,11 @@
 package me.geek.tom.NeoPixelRemoteServer.particlesystem.particle;
 
 import com.github.mbelling.ws281x.Color;
-import me.geek.tom.NeoPixelRemoteServer.particlesystem.Colour;
 import me.geek.tom.NeoPixelRemoteServer.particlesystem.strip.IStrip;
 
 import java.util.Random;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class Particle {
 
     private final long start_time;
@@ -21,7 +20,7 @@ public class Particle {
     private int pos;
 
     // For how long can this particle exist?
-    private int decayTime = 5000;
+    private int decayTime = 10000;
 
     private int age;
 
@@ -32,6 +31,8 @@ public class Particle {
     private void makeDead() {
         this.dead = true;
     }
+
+    public int getPos() { return this.pos; }
 
     private static final Color[][] particlePool = {
             {new Color(128, 0, 0), new Color(255, 0, 0), new Color(128, 0, 0)},
@@ -48,14 +49,15 @@ public class Particle {
         this.particle = particlePool[new Random().nextInt(particlePool.length)];
         /* for (Color c : this.particle) {
             System.out.println("R: " + c.getRed() + " G: " + c.getGreen() + " B: " + c.getBlue());
-        } */
+        }
         System.out.println();
+        */
     }
 
 
 
     public void draw(IStrip strip) {
-        float sf = ((float) this.age) / ((float) this.decayTime);
+        float sf = ((float) this.age) / ((float) this.decayTime) * 2;
         for (int i = 0; i < particle.length; i++) {
             int pixelPos = pos + i - 1;
 

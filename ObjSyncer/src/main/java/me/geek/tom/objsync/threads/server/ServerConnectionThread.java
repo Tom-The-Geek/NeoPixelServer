@@ -1,6 +1,8 @@
 package me.geek.tom.objsync.threads.server;
 
 import com.google.common.collect.Lists;
+import me.geek.tom.objsync.threads.server.event.ClientConnectedEvent;
+import me.geek.tom.objsync.threads.server.event.managers.EventManager;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -39,9 +41,11 @@ public class ServerConnectionThread extends Thread {
                 Thread t = new ServerClientConnectionThread(s, this);
                 t.start();
                 threads.add(t);
+                EventManager.INSTANCE.triggerEvent(new ClientConnectedEvent(s.getInetAddress()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+        LOGGER.info("Server thread stopped!");
     }
 }

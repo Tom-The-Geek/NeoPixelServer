@@ -1,7 +1,8 @@
-package me.geek.tom.objsync.threads.server.event;
+package me.geek.tom.objsync.threads.server.event.managers;
 
 import com.google.common.collect.Lists;
 import me.geek.tom.objsync.packets.Packet;
+import me.geek.tom.objsync.threads.server.event.handlers.ServerPacketHandler;
 
 import java.util.List;
 
