@@ -5,6 +5,7 @@ import me.geek.tom.objsync.threads.server.event.ClientConnectedEvent;
 import me.geek.tom.objsync.threads.server.event.managers.EventManager;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
@@ -20,16 +21,18 @@ public class ServerConnectionThread extends Thread {
     }
 
     private final List<Thread> threads = Lists.newArrayList();
+    private int port;
 
-    public ServerConnectionThread() {
+    public ServerConnectionThread(int port) {
         super();
         setName("Server listener thread");
+        this.port = port;
     }
 
     @Override
     public void run() {
         try {
-            this.socket = new ServerSocket(9845);
+            this.socket = new ServerSocket(this.port, 50, InetAddress.getByName("0.0.0.0"));
         } catch (IOException e) {
             LOGGER.info("Failed to bind to port:");
             e.printStackTrace();

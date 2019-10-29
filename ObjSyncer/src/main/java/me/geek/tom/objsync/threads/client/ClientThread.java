@@ -6,7 +6,6 @@ import me.geek.tom.objsync.threads.client.event.ConnectedEvent;
 import me.geek.tom.objsync.threads.client.event.LostConnectionEvent;
 import me.geek.tom.objsync.threads.client.event.managers.ClientEventManager;
 import me.geek.tom.objsync.threads.client.event.managers.ClientPacketEventManager;
-import me.geek.tom.objsync.threads.server.event.ClientDisconnectEvent;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
