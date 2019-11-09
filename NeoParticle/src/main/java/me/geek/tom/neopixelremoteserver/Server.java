@@ -1,4 +1,4 @@
-package me.geek.tom.NeoPixelRemoteServer;
+package me.geek.tom.neopixelremoteserver;
 
 import com.github.mbelling.ws281x.LedStripType;
 import com.github.mbelling.ws281x.Ws281xLedStrip;

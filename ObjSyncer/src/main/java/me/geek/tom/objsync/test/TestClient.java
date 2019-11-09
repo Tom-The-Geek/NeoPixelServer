@@ -47,6 +47,6 @@ public class TestClient {
 
         while (!networkThread.isReady()) {}
 
-        ClientThread clientThread = (ClientThread) networkThread.getConnectionThread();
+        // ClientThread clientThread = (ClientThread) networkThread.getConnectionThread();
     }
 }

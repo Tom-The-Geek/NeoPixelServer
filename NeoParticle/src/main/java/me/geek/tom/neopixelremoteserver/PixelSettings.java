@@ -1,4 +1,4 @@
-package me.geek.tom.NeoPixelRemoteServer;
+package me.geek.tom.neopixelremoteserver;
 
 public class PixelSettings {
     public static final int NUM_PIXELS = 240;

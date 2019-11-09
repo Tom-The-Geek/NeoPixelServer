@@ -1,8 +1,8 @@
-package me.geek.tom.NeoPixelRemoteServer.particlesystem.strip;
+package me.geek.tom.neopixelremoteserver.particlesystem.strip;
 
 import com.github.mbelling.ws281x.Color;
 import com.google.common.collect.Lists;
-import me.geek.tom.NeoPixelRemoteServer.particlesystem.Colour;
+import me.geek.tom.neopixelremoteserver.particlesystem.Colour;
 
 import java.util.List;
 import java.util.logging.Logger;

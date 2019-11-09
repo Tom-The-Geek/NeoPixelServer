@@ -2,9 +2,9 @@ package me.geek.tom.remoteneoparticle.server;
 
 import com.github.mbelling.ws281x.LedStripType;
 import com.github.mbelling.ws281x.Ws281xLedStrip;
-import me.geek.tom.NeoPixelRemoteServer.PixelSettings;
-import me.geek.tom.NeoPixelRemoteServer.particlesystem.strip.HWStrip;
-import me.geek.tom.NeoPixelRemoteServer.particlesystem.strip.IStrip;
+import me.geek.tom.neopixelremoteserver.PixelSettings;
+import me.geek.tom.neopixelremoteserver.particlesystem.strip.HWStrip;
+import me.geek.tom.neopixelremoteserver.particlesystem.strip.IStrip;
 
 @SuppressWarnings("StatementWithEmptyBody")
 public class StripServer {
@@ -27,6 +27,8 @@ public class StripServer {
         IStrip strip = new HWStrip(s);
 
         ConnectedStrip conStrip = new ConnectedStrip(strip);
+
+        conStrip.getLength(); // Give the local vaiable a use, otherwise Codacy complains - Tom_The_Geek 2019
 
         while (true) { }
     }

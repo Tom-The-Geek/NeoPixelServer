@@ -1,7 +1,7 @@
-package me.geek.tom.NeoPixelRemoteServer.particlesystem.emitter;
+package me.geek.tom.neopixelremoteserver.particlesystem.emitter;
 
-import me.geek.tom.NeoPixelRemoteServer.particlesystem.particle.Particle;
-import me.geek.tom.NeoPixelRemoteServer.particlesystem.particle.ParticleManager;
+import me.geek.tom.neopixelremoteserver.particlesystem.particle.Particle;
+import me.geek.tom.neopixelremoteserver.particlesystem.particle.ParticleManager;
 
 import java.util.Random;
 
@@ -11,13 +11,13 @@ public class Emitter {
     private long start_time;
     private int age;
 
-    public Class<? extends Particle> getParticle() {
-        return particle;
-    }
-
     private final Class<? extends Particle> particle;
     private final int probability;
     private final Random random = new Random();
+
+    public Class<? extends Particle> getParticle() {
+        return particle;
+    }
 
     public Emitter(Class<? extends Particle> particle, int probability) {
         this.particle = particle;

@@ -1,7 +1,7 @@
-package me.geek.tom.NeoPixelRemoteServer.particlesystem.particle;
+package me.geek.tom.neopixelremoteserver.particlesystem.particle;
 
 import com.github.mbelling.ws281x.Color;
-import me.geek.tom.NeoPixelRemoteServer.particlesystem.strip.IStrip;
+import me.geek.tom.neopixelremoteserver.particlesystem.strip.IStrip;
 
 import java.util.Random;
 
@@ -12,10 +12,6 @@ public class Particle {
 
     private boolean dead = false;
 
-    public void setPos(int pos) {
-        this.pos = pos;
-    }
-
     // Track the particles position
     private int pos;
 
@@ -23,6 +19,18 @@ public class Particle {
     private int decayTime = 20000;
 
     private int age;
+
+    private static final Color[][] particlePool = {
+            {new Color(128, 0, 0), new Color(255, 0, 0), new Color(128, 0, 0)},
+            {new Color(0, 128, 0), new Color(0, 255, 0), new Color(0, 128, 0)},
+            {new Color(0, 0, 128), new Color(0, 0, 255), new Color(0, 0, 128)},
+    };
+
+    private final Color[] particle;
+
+    public void setPos(int pos) {
+        this.pos = pos;
+    }
 
     public boolean isDead() {
         return dead;
@@ -33,14 +41,6 @@ public class Particle {
     }
 
     public int getPos() { return this.pos; }
-
-    private static final Color[][] particlePool = {
-            {new Color(128, 0, 0), new Color(255, 0, 0), new Color(128, 0, 0)},
-            {new Color(0, 128, 0), new Color(0, 255, 0), new Color(0, 128, 0)},
-            {new Color(0, 0, 128), new Color(0, 0, 255), new Color(0, 0, 128)},
-    };
-
-    private final Color[] particle;
 
     public Particle() {
         this.pos = 0;

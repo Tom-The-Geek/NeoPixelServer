@@ -1,8 +1,8 @@
 package me.geek.tom.remoteneoparticle.particlesystemext;
 
 import com.github.mbelling.ws281x.Color;
-import me.geek.tom.NeoPixelRemoteServer.particlesystem.strip.BufferStrip;
-import me.geek.tom.NeoPixelRemoteServer.particlesystem.strip.IStrip;
+import me.geek.tom.neopixelremoteserver.particlesystem.strip.BufferStrip;
+import me.geek.tom.neopixelremoteserver.particlesystem.strip.IStrip;
 import me.geek.tom.remoteneoparticle.networking.ClientNetworkingManager;
 import me.geek.tom.remoteneoparticle.networking.packets.StripSetColourPacket;
 import me.geek.tom.remoteneoparticle.networking.packets.StripShowPacket;
@@ -10,12 +10,12 @@ import me.geek.tom.remoteneoparticle.networking.packets.StripShowPacket;
 public class RemoteStrip implements IStrip {
 
     private int length;
-    private final int id;
+    // private final int id;
     private BufferStrip bufferStrip;
 
     public RemoteStrip(int length, int id) {
         this.length = length;
-        this.id = id;
+        // this.id = id;
         this.bufferStrip = new BufferStrip(this);
     }
 

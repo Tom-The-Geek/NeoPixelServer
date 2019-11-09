@@ -1,4 +1,4 @@
-package me.geek.tom.NeoPixelRemoteServer.particlesystem.strip;
+package me.geek.tom.neopixelremoteserver.particlesystem.strip;
 
 import com.github.mbelling.ws281x.Color;
 

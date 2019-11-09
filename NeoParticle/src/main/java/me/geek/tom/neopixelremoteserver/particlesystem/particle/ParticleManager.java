@@ -1,9 +1,9 @@
-package me.geek.tom.NeoPixelRemoteServer.particlesystem.particle;
+package me.geek.tom.neopixelremoteserver.particlesystem.particle;
 
 import com.google.common.collect.Lists;
-import me.geek.tom.NeoPixelRemoteServer.particlesystem.emitter.Emitter;
-import me.geek.tom.NeoPixelRemoteServer.particlesystem.strip.BufferStrip;
-import me.geek.tom.NeoPixelRemoteServer.particlesystem.strip.IStrip;
+import me.geek.tom.neopixelremoteserver.particlesystem.emitter.Emitter;
+import me.geek.tom.neopixelremoteserver.particlesystem.strip.BufferStrip;
+import me.geek.tom.neopixelremoteserver.particlesystem.strip.IStrip;
 
 import java.util.List;
 import java.util.logging.Logger;

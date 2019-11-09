@@ -16,12 +16,12 @@ public class ServerConnectionThread extends Thread {
     private ServerSocket socket;
     private static final Logger LOGGER = Logger.getLogger(ServerConnectionThread.class.getName());
 
+    private final List<Thread> threads = Lists.newArrayList();
+    private int port;
+
     public List<Thread> getThreads() {
         return threads;
     }
-
-    private final List<Thread> threads = Lists.newArrayList();
-    private int port;
 
     public ServerConnectionThread(int port) {
         super();

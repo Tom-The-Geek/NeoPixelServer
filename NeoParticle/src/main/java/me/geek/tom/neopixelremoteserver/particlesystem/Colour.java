@@ -1,4 +1,4 @@
-package me.geek.tom.NeoPixelRemoteServer.particlesystem;
+package me.geek.tom.neopixelremoteserver.particlesystem;
 
 import com.github.mbelling.ws281x.Color;
 

@@ -1,7 +1,5 @@
 package me.geek.tom.utils;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;

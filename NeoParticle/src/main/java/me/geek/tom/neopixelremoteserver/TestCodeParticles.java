@@ -1,11 +1,11 @@
-package me.geek.tom.NeoPixelRemoteServer;
+package me.geek.tom.neopixelremoteserver;
 
 import com.github.mbelling.ws281x.LedStripType;
 import com.github.mbelling.ws281x.Ws281xLedStrip;
-import me.geek.tom.NeoPixelRemoteServer.particlesystem.emitter.Emitter;
-import me.geek.tom.NeoPixelRemoteServer.particlesystem.particle.Particle;
-import me.geek.tom.NeoPixelRemoteServer.particlesystem.particle.ParticleManager;
-import me.geek.tom.NeoPixelRemoteServer.particlesystem.strip.HWStrip;
+import me.geek.tom.neopixelremoteserver.particlesystem.emitter.Emitter;
+import me.geek.tom.neopixelremoteserver.particlesystem.particle.Particle;
+import me.geek.tom.neopixelremoteserver.particlesystem.particle.ParticleManager;
+import me.geek.tom.neopixelremoteserver.particlesystem.strip.HWStrip;
 
 import java.io.IOException;
 import java.io.InputStream;

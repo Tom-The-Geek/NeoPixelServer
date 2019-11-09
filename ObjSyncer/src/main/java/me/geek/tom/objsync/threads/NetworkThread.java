@@ -10,12 +10,12 @@ public class NetworkThread extends Thread {
     private String host;
     private int port;
 
+    private Thread connectionThread;
+    private boolean active;
+
     public Thread getConnectionThread() {
         return connectionThread;
     }
-
-    private Thread connectionThread;
-    private boolean active;
 
     public NetworkThread(Mode mode, String host, int port) {
         this.mode = mode;
