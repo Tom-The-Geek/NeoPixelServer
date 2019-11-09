@@ -20,7 +20,7 @@ public class Particle {
     private int pos;
 
     // For how long can this particle exist?
-    private int decayTime = 10000;
+    private int decayTime = 20000;
 
     private int age;
 

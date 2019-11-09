@@ -1,8 +1,7 @@
 package me.geek.tom.NeoPixelRemoteServer;
 
-@SuppressWarnings("WeakerAccess")
 public class PixelSettings {
-    public static final int NUM_PIXELS = 150;
+    public static final int NUM_PIXELS = 240;
     public static final int LED_PIN = 18;
     public static final int LED_DMA = 10;
     public static final int LED_BRIGHTNESS = 128;
