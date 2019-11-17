@@ -32,11 +32,15 @@ public class NetworkThread extends Thread {
     public void run() {
         if (this.mode.equals(Mode.CLIENT)) {
             // this.connectionThread = new ClientThread("192.168.1.115", 9845);
+            System.out.println("client setting up...");
             this.connectionThread = new ClientThread(this.host, this.port);
         } else if (this.mode.equals(Mode.SERVER)) {
+            System.out.println("server setting up...");
             this.connectionThread = new ServerConnectionThread(this.port);
         }
+        System.out.println("starting child thread...");
         this.connectionThread.start();
+        System.out.println("setting active flag!");
         this.active = true;
     }
 

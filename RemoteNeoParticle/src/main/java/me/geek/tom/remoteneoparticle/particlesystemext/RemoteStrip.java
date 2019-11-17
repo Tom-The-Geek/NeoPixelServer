@@ -13,7 +13,7 @@ public class RemoteStrip implements IStrip {
     // private final int id;
     private BufferStrip bufferStrip;
 
-    public RemoteStrip(int length, int id) {
+    public RemoteStrip(int length) {
         this.length = length;
         // this.id = id;
         this.bufferStrip = new BufferStrip(this);
@@ -31,9 +31,12 @@ public class RemoteStrip implements IStrip {
 
     @Override
     public void show() {
+        System.out.println("show");
         for (int i = 0; i < this.length; i++) {
             ClientNetworkingManager.getInstance().sendStripPacket(new StripSetColourPacket(i, this.bufferStrip.getPixel(i)));
+            System.out.println("setting pixel: " + i);
         }
+        System.out.println("Send show packet");
         ClientNetworkingManager.getInstance().sendStripPacket(new StripShowPacket());
     }
 

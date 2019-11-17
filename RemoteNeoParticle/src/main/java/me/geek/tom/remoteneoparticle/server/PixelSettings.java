@@ -1,5 +1,6 @@
 package me.geek.tom.remoteneoparticle.server;
 
+@SuppressWarnings("WeakerAccess")
 public class PixelSettings {
     public static final int NUM_PIXELS = 150;
     public static final int LED_PIN = 18;

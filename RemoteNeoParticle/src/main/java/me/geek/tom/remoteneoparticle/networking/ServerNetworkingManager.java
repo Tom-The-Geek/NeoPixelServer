@@ -22,7 +22,8 @@ public class ServerNetworkingManager {
     }
 
     private ServerNetworkingManager() {
-        this.networkThread = new NetworkThread(NetworkThread.Mode.SERVER, "127.0.0.1", 10002);
+        this.networkThread = new NetworkThread(NetworkThread.Mode.SERVER, "0.0.0.0", 10002);
+        this.networkThread.start();
         while (!this.networkThread.isReady()) {}
         // Initialise packet registry
         try {

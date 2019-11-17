@@ -2,7 +2,6 @@ package me.geek.tom.remoteneoparticle.server;
 
 import com.github.mbelling.ws281x.LedStripType;
 import com.github.mbelling.ws281x.Ws281xLedStrip;
-import me.geek.tom.neopixelremoteserver.PixelSettings;
 import me.geek.tom.neopixelremoteserver.particlesystem.strip.HWStrip;
 import me.geek.tom.neopixelremoteserver.particlesystem.strip.IStrip;
 
@@ -30,6 +29,6 @@ public class StripServer {
 
         conStrip.getLength(); // Give the local vaiable a use, otherwise Codacy complains - Tom_The_Geek 2019
 
-        while (true) { }
+        while (true) { } // Allow the program to continue running. Might add something here, maybe a command interface?
     }
 }
